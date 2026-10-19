@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calendario de Adviento</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <div class="nieve" aria-hidden="true"></div>
+
+  <main class="contenedor">
+    <header class="cabecera">
+      <h1 id="titulo">Calendario de Adviento</h1>
+      <p id="estado" class="estado"></p>
+    </header>
+
+    <section id="calendario" class="calendario" aria-label="Calendario de Adviento"></section>
+
+    <p id="final" class="final" hidden></p>
+  </main>
+
+  <dialog id="modal" class="modal" aria-labelledby="modal-titulo">
+    <article class="modal-caja">
+      <button class="modal-cerrar" id="modal-cerrar" aria-label="Cerrar">&times;</button>
+      <p class="modal-dia" id="modal-dia"></p>
+      <h2 id="modal-titulo"></h2>
+      <p id="modal-texto" class="modal-texto"></p>
+      <button id="modal-respuesta-btn" class="boton" hidden>Ver la respuesta</button>
+      <p id="modal-respuesta" class="modal-respuesta" hidden></p>
+    </article>
+  </dialog>
+
+  <div id="aviso" class="aviso" role="status" aria-live="polite"></div>
+
+  <script src="contenido.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

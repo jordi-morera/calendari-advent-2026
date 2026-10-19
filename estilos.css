@@ -1,0 +1,206 @@
+:root {
+  --fondo-1: #0f1d33;
+  --fondo-2: #1b2f4f;
+  --texto: #f4efe6;
+  --dorado: #f2c14e;
+  --rojo: #b3283a;
+  --rojo-oscuro: #8a1c2b;
+  --verde: #2f6b4f;
+  --apagado: #3a4a63;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; min-height: 100%; }
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  color: var(--texto);
+  background: linear-gradient(180deg, var(--fondo-1), var(--fondo-2)) fixed;
+  line-height: 1.5;
+}
+
+.contenedor {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 24px 16px 56px;
+  position: relative;
+  z-index: 1;
+}
+
+.cabecera { text-align: center; margin-bottom: 24px; }
+.cabecera h1 {
+  margin: 0 0 6px;
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  color: var(--dorado);
+}
+.estado { margin: 0; opacity: .85; }
+
+/* ---------- Rejilla ---------- */
+.calendario {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+@media (min-width: 640px) {
+  .calendario { grid-template-columns: repeat(6, 1fr); gap: 16px; }
+}
+
+.casilla {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border: 2px solid rgba(242, 193, 78, .5);
+  border-radius: 14px;
+  color: var(--texto);
+  font: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2px;
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+.casilla:focus-visible { outline: 3px solid var(--dorado); outline-offset: 3px; }
+.casilla:hover { transform: translateY(-2px); }
+
+.numero { font-size: clamp(1.3rem, 5vw, 2rem); font-weight: 700; }
+.icono { font-size: clamp(.9rem, 3vw, 1.3rem); }
+
+.casilla.disponible { background: var(--rojo); }
+.casilla.hoy {
+  background: var(--rojo);
+  border-color: var(--dorado);
+  box-shadow: 0 0 0 0 rgba(242, 193, 78, .7);
+  animation: pulso 2s infinite;
+}
+.casilla.abierta {
+  background: var(--verde);
+  border-color: rgba(255, 255, 255, .35);
+}
+.casilla.abierta .numero { font-size: .85rem; opacity: .8; }
+.casilla.abierta .icono { font-size: clamp(1.3rem, 5vw, 1.9rem); }
+
+.casilla.futura {
+  background: var(--apagado);
+  border-color: transparent;
+  opacity: .65;
+  cursor: not-allowed;
+}
+.casilla.futura:hover { transform: none; }
+
+.casilla.temblor { animation: temblor .4s; }
+
+@keyframes pulso {
+  0% { box-shadow: 0 0 0 0 rgba(242, 193, 78, .7); }
+  70% { box-shadow: 0 0 0 12px rgba(242, 193, 78, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(242, 193, 78, 0); }
+}
+@keyframes temblor {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.final {
+  margin: 28px auto 0;
+  text-align: center;
+  max-width: 520px;
+  padding: 16px;
+  border: 2px dashed var(--dorado);
+  border-radius: 14px;
+  color: var(--dorado);
+}
+
+/* ---------- Modal ---------- */
+.modal {
+  border: none;
+  padding: 0;
+  background: transparent;
+  max-width: min(480px, 92vw);
+  width: 100%;
+  color: var(--texto);
+}
+.modal::backdrop { background: rgba(5, 10, 20, .75); }
+
+.modal-caja {
+  position: relative;
+  background: linear-gradient(160deg, #24395c, #172844);
+  border: 2px solid var(--dorado);
+  border-radius: 18px;
+  padding: 28px 24px 24px;
+  text-align: center;
+  animation: entra .25s ease;
+}
+@keyframes entra {
+  from { transform: scale(.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.modal-caja h2 { margin: 4px 0 12px; color: var(--dorado); }
+.modal-dia { margin: 0; opacity: .8; font-size: .95rem; }
+.modal-texto { font-size: 1.15rem; margin: 0 0 16px; }
+.modal-respuesta {
+  margin: 12px 0 0;
+  padding: 10px 14px;
+  background: rgba(242, 193, 78, .15);
+  border-radius: 10px;
+  font-weight: 600;
+}
+.modal-cerrar {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--texto);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.boton {
+  background: var(--dorado);
+  color: #1a1a1a;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ---------- Aviso ---------- */
+.aviso {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translate(-50%, 20px);
+  background: #0b1424;
+  border: 1px solid var(--dorado);
+  padding: 10px 18px;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s, transform .25s;
+  z-index: 10;
+  max-width: 92vw;
+  text-align: center;
+}
+.aviso.visible { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- Nieve ---------- */
+.nieve { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.nieve span {
+  position: absolute;
+  top: -30px;
+  color: #fff;
+  animation: cae linear infinite;
+}
+@keyframes cae {
+  to { transform: translateY(110vh) translateX(30px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .casilla.hoy, .casilla.temblor, .modal-caja { animation: none; }
+}
