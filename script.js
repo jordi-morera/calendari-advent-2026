@@ -61,6 +61,17 @@
     return TOTAL;
   }
 
+  // Dia de l'Advent que és avui (1..24), o 0 si som abans de l'1 de desembre o després del 24.
+  function diaDeHoy() {
+    if (modoPrueba) {
+      const n = parseInt(diaForzado, 10);
+      return n >= 1 && n <= TOTAL ? n : 0;
+    }
+    const h = new Date();
+    if (h.getFullYear() === CONFIG.anio && h.getMonth() === 11 && h.getDate() <= TOTAL) return h.getDate();
+    return 0;
+  }
+
   function diasHastaInicio() {
     const hoy = new Date();
     const inicio = new Date(CONFIG.anio, 11, 1);
@@ -69,37 +80,39 @@
   }
 
   // ---------- Renderització ----------
-  function pintarCabecera(limite) {
+  function pintarCabecera(limite, hoy) {
     $("titulo").textContent = "Calendari d'Advent per " + CONFIG.nombre;
     document.title = "Advent per " + CONFIG.nombre;
     let texto;
     if (limite === 0) {
       const n = diasHastaInicio();
       texto = n === 1 ? "Comença demà. Paciència 😉" : "Comença l'1 de desembre. Falten " + n + " dies.";
-    } else if (limite >= TOTAL && !modoPrueba && new Date().getMonth() !== 11) {
+    } else if (hoy === 0) {
       texto = "El calendari ja està complet.";
     } else {
-      texto = "Avui és " + limite + " de desembre. Ja pots obrir fins a aquesta casella.";
+      texto = "Avui és " + hoy + " de desembre. Troba la casella del " + hoy + "!";
     }
     if (modoPrueba) texto += " (mode de prova)";
     $("estado").textContent = texto;
   }
 
-  function claseCasilla(n, limite) {
-    if (abiertos.includes(n)) return "abierta";
+  // L'estat depèn de la DATA, no del que hi hagi guardat al navegador:
+  // els dies passats surten sempre oberts; només el d'avui espera que ella el premi.
+  function claseCasilla(n, limite, hoy) {
     if (n > limite) return "futura";
-    if (n === limite) return "hoy";
-    return "disponible";
+    if (hoy === 0 || n < hoy) return "abierta";
+    return abiertos.includes(n) ? "abierta" : "hoy";
   }
 
   function pintar() {
     const limite = diaDesbloqueado();
-    pintarCabecera(limite);
+    const hoy = diaDeHoy();
+    pintarCabecera(limite, hoy);
     calendario.innerHTML = "";
 
     for (const n of ORDEN) {
       const dia = DIAS[n - 1];
-      const estado = claseCasilla(n, limite);
+      const estado = claseCasilla(n, limite, hoy);
       const b = document.createElement("button");
       b.type = "button";
       b.className = "casilla " + estado;
@@ -117,10 +130,6 @@
         b.appendChild(ico);
         b.setAttribute("aria-label", "Dia " + n + ", obert. Torna'l a veure.");
       } else if (estado === "futura") {
-        const ico = document.createElement("span");
-        ico.className = "icono";
-        ico.textContent = "🔒";
-        b.appendChild(ico);
         b.setAttribute("aria-label", "Dia " + n + ", encara bloquejat");
       } else {
         b.setAttribute("aria-label", "Dia " + n + ", prem per obrir");
@@ -131,7 +140,7 @@
     }
 
     const final = $("final");
-    if (abiertos.length >= TOTAL) {
+    if (limite === TOTAL && (hoy === 0 || abiertos.includes(TOTAL))) {
       final.textContent = CONFIG.mensajeFinal;
       final.hidden = false;
     } else {

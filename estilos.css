@@ -71,13 +71,11 @@ body {
 .numero { font-size: clamp(1.3rem, 5vw, 2rem); font-weight: 700; }
 .icono { font-size: clamp(.9rem, 3vw, 1.3rem); }
 
-.casilla.disponible { background: var(--rojo); }
-.casilla.hoy {
-  background: var(--rojo);
-  border-color: var(--dorado);
-  box-shadow: 0 0 0 0 rgba(242, 193, 78, .7);
-  animation: pulso 2s infinite;
-}
+/* Les caselles que encara no s'han obert (la d'avui i les futures) són idèntiques
+   a propòsit: cal trobar el número, no et pot delatar ni un color ni un llum. */
+.casilla.disponible,
+.casilla.hoy,
+.casilla.futura { background: var(--rojo); }
 .casilla.abierta {
   background: var(--verde);
   border-color: var(--dorado);
@@ -85,13 +83,6 @@ body {
 .casilla.abierta .numero { font-size: .85rem; opacity: .8; }
 .casilla.abierta .icono { font-size: clamp(1.3rem, 5vw, 1.9rem); }
 
-.casilla.futura {
-  background: var(--apagado);
-  border-color: transparent;
-  opacity: .65;
-  cursor: not-allowed;
-}
-.casilla.futura:hover { transform: none; }
 
 .casilla.temblor { animation: temblor .4s; }
 
@@ -243,5 +234,5 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .casilla.hoy, .casilla.temblor, .modal-caja { animation: none; }
+  .casilla.temblor, .modal-caja { animation: none; }
 }
