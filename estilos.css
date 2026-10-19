@@ -34,9 +34,11 @@ body {
 .cabecera h1 {
   margin: 0 0 6px;
   font-size: clamp(1.6rem, 5vw, 2.4rem);
+  line-height: 1.15;
+  text-wrap: balance;   /* reparte el título en líneas equilibradas */
   color: var(--dorado);
 }
-.estado { margin: 0; opacity: .85; }
+.estado { margin: 0; opacity: .85; text-wrap: balance; }
 
 /* ---------- Graella ---------- */
 .calendario {

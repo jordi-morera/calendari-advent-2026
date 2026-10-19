@@ -70,8 +70,8 @@
 
   // ---------- Renderització ----------
   function pintarCabecera(limite) {
-    $("titulo").textContent = "Calendari d'Advent de " + CONFIG.nombre;
-    document.title = "Advent de " + CONFIG.nombre;
+    $("titulo").textContent = "Calendari d'Advent per " + CONFIG.nombre;
+    document.title = "Advent per " + CONFIG.nombre;
     let texto;
     if (limite === 0) {
       const n = diasHastaInicio();
