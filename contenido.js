@@ -5,6 +5,7 @@
 const CONFIG = {
   nombre: "Judith",                 // apareix al títol
   anio: 2026,                       // any del calendari (s'obre al desembre d'aquell any)
+  ordenAleatorio: true,           // true = casillas mezcladas (fijo); false = del 1 al 24
   mensajeFinal: "Has arribat al final del calendari. Gràcies per obrir cada dia. Bon Nadal 🎄"
 };
 

@@ -2,6 +2,28 @@
   "use strict";
 
   const TOTAL = 24;
+
+  // Orden de las casillas: mezclado pero fijo (siempre el mismo para el mismo año),
+  // así hay que buscar cada número, pero no cambia de sitio al recargar.
+  // Para volver al orden normal: ordenAleatorio: false en contenido.js.
+  function crearOrden() {
+    const orden = Array.from({ length: TOTAL }, (_, i) => i + 1);
+    if (CONFIG.ordenAleatorio === false) return orden;
+    let semilla = (CONFIG.anio * 2654435761) >>> 0;
+    const azar = () => {                       // mulberry32: generador con semilla
+      semilla = (semilla + 0x6D2B79F5) >>> 0;
+      let t = semilla;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+    for (let i = orden.length - 1; i > 0; i--) {
+      const j = Math.floor(azar() * (i + 1));
+      [orden[i], orden[j]] = [orden[j], orden[i]];
+    }
+    return orden;
+  }
+  const ORDEN = crearOrden();
   const ICONOS = { frase: "💬", acertijo: "🧩", reto: "⭐", sorpresa: "🎁" };
 
   // Mode de prova: afegeix ?dia=10 a l'URL per simular que avui és 10 de desembre.
@@ -75,7 +97,7 @@
     pintarCabecera(limite);
     calendario.innerHTML = "";
 
-    for (let n = 1; n <= TOTAL; n++) {
+    for (const n of ORDEN) {
       const dia = DIAS[n - 1];
       const estado = claseCasilla(n, limite);
       const b = document.createElement("button");
