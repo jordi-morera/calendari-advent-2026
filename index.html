@@ -1,32 +1,50 @@
 <!doctype html>
-<html lang="es">
+<html lang="ca">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Calendario de Adviento</title>
+  <title>Calendari d'Advent</title>
   <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
   <div class="nieve" aria-hidden="true"></div>
+  <div class="guirnalda" aria-hidden="true"></div>
+
+  <div class="paisaje" aria-hidden="true">
+    <svg class="arbol arbol-a" viewBox="0 0 100 150"><rect x="44" y="124" width="12" height="22" fill="#6b4423"/><polygon points="50,6 82,58 18,58" fill="#1f7a45"/><polygon points="50,30 90,95 10,95" fill="#18693b"/><polygon points="50,60 96,128 4,128" fill="#115a31"/><polygon points="50,0 54,9 63,10 56,16 58,25 50,20 42,25 44,16 37,10 46,9" fill="#f2c14e"/><circle cx="36" cy="80" r="4" fill="#d9363e"/><circle cx="64" cy="106" r="4" fill="#f2c14e"/><circle cx="40" cy="116" r="4" fill="#d9363e"/><circle cx="60" cy="52" r="3.5" fill="#f2c14e"/><circle cx="46" cy="42" r="3.5" fill="#d9363e"/></svg>
+    <svg class="arbol arbol-b" viewBox="0 0 100 150"><rect x="44" y="124" width="12" height="22" fill="#6b4423"/><polygon points="50,6 82,58 18,58" fill="#1f7a45"/><polygon points="50,30 90,95 10,95" fill="#18693b"/><polygon points="50,60 96,128 4,128" fill="#115a31"/><circle cx="62" cy="84" r="4" fill="#f2c14e"/><circle cx="34" cy="108" r="4" fill="#d9363e"/><circle cx="66" cy="118" r="4" fill="#d9363e"/><circle cx="44" cy="50" r="3.5" fill="#d9363e"/><circle cx="56" cy="40" r="3.5" fill="#f2c14e"/></svg>
+    <svg class="caga-tio" viewBox="0 0 200 110">
+      <rect x="40" y="84" width="10" height="22" rx="3" fill="#4a2c14"/><rect x="132" y="84" width="10" height="22" rx="3" fill="#4a2c14"/>
+      <rect x="30" y="38" width="130" height="52" rx="22" fill="#8a5a2b"/>
+      <ellipse cx="160" cy="64" rx="14" ry="26" fill="#a2713a"/><ellipse cx="160" cy="64" rx="7" ry="14" fill="#d7a96b"/>
+      <path d="M62 40 H128 L134 90 H56 Z" fill="#b3283a"/><path d="M62 40 H128" stroke="#f2c14e" stroke-width="3"/><path d="M60 62 H131 M58 76 H133" stroke="#8a1c2b" stroke-width="3"/>
+      <path d="M30 54 Q8 40 30 26 Q54 12 74 30 Q56 20 44 36 Q36 46 40 56 Z" fill="#b3283a"/><circle cx="34" cy="26" r="7" fill="#fff"/>
+      <circle cx="48" cy="58" r="5" fill="#fff"/><circle cx="48" cy="58" r="2.4" fill="#222"/>
+      <circle cx="40" cy="68" r="4" fill="#e8736f" opacity=".7"/>
+      <path d="M38 72 Q46 80 56 72" stroke="#3b1c0a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+    <svg class="arbol arbol-c" viewBox="0 0 100 150"><rect x="44" y="124" width="12" height="22" fill="#6b4423"/><polygon points="50,6 82,58 18,58" fill="#1f7a45"/><polygon points="50,30 90,95 10,95" fill="#18693b"/><polygon points="50,60 96,128 4,128" fill="#115a31"/><circle cx="38" cy="82" r="4" fill="#f2c14e"/><circle cx="66" cy="104" r="4" fill="#d9363e"/><circle cx="36" cy="114" r="4" fill="#f2c14e"/><circle cx="58" cy="50" r="3.5" fill="#d9363e"/></svg>
+    <svg class="arbol arbol-d" viewBox="0 0 100 150"><rect x="44" y="124" width="12" height="22" fill="#6b4423"/><polygon points="50,6 82,58 18,58" fill="#1f7a45"/><polygon points="50,30 90,95 10,95" fill="#18693b"/><polygon points="50,60 96,128 4,128" fill="#115a31"/><circle cx="60" cy="86" r="4" fill="#d9363e"/><circle cx="38" cy="106" r="4" fill="#f2c14e"/><circle cx="50" cy="44" r="3.5" fill="#f2c14e"/></svg>
+  </div>
 
   <main class="contenedor">
     <header class="cabecera">
-      <h1 id="titulo">Calendario de Adviento</h1>
+      <h1 id="titulo">Calendari d'Advent</h1>
       <p id="estado" class="estado"></p>
     </header>
 
-    <section id="calendario" class="calendario" aria-label="Calendario de Adviento"></section>
+    <section id="calendario" class="calendario" aria-label="Calendari d'Advent"></section>
 
     <p id="final" class="final" hidden></p>
   </main>
 
   <dialog id="modal" class="modal" aria-labelledby="modal-titulo">
     <article class="modal-caja">
-      <button class="modal-cerrar" id="modal-cerrar" aria-label="Cerrar">&times;</button>
+      <button class="modal-cerrar" id="modal-cerrar" aria-label="Tanca">&times;</button>
       <p class="modal-dia" id="modal-dia"></p>
       <h2 id="modal-titulo"></h2>
       <p id="modal-texto" class="modal-texto"></p>
-      <button id="modal-respuesta-btn" class="boton" hidden>Ver la respuesta</button>
+      <button id="modal-respuesta-btn" class="boton" hidden>Mostra la resposta</button>
       <p id="modal-respuesta" class="modal-respuesta" hidden></p>
     </article>
   </dialog>

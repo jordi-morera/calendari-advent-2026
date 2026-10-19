@@ -1,39 +1,39 @@
 // ============================================================
-//  AQUÍ EDITAS TODO EL CONTENIDO DEL CALENDARIO
+//  AQUÍ EDITES TOT EL CONTINGUT DEL CALENDARI
 // ============================================================
 
 const CONFIG = {
-  nombre: "Judith",                 // aparece en el título
-  anio: 2026,                       // año del calendario (se abre en diciembre de ese año)
-  mensajeFinal: "Has llegado al final del calendario. Gracias por abrir cada día. Feliz Navidad 🎄"
+  nombre: "Judith",                 // apareix al títol
+  anio: 2026,                       // any del calendari (s'obre al desembre d'aquell any)
+  mensajeFinal: "Has arribat al final del calendari. Gràcies per obrir cada dia. Bon Nadal 🎄"
 };
 
-// tipo: "frase" | "acertijo" | "reto" | "sorpresa"
-// Si es "acertijo", añade el campo "respuesta" (se muestra al pulsar un botón).
-// Estos 24 textos son de ejemplo: cámbialos por los vuestros.
+// tipus: "frase" | "acertijo" | "reto" | "sorpresa"
+// Si és "acertijo", afegeix-hi el camp "respuesta" (es mostra en prémer un botó).
+// Aquests 24 textos són exemples: canvieu-los pels vostres.
 const DIAS = [
-  { tipo: "frase",    titulo: "Empezamos",          texto: "Cada día cuenta, incluso los pequeños. Hoy toca empezar con calma." },
-  { tipo: "acertijo", titulo: "Primer acertijo",    texto: "Tengo ciudades pero no casas, montañas pero no árboles, agua pero no peces. ¿Qué soy?", respuesta: "Un mapa." },
-  { tipo: "reto",     titulo: "Mini reto",          texto: "Hoy, manda un mensaje a alguien con quien hace tiempo que no hablas." },
-  { tipo: "acertijo", titulo: "Acertijo",           texto: "Cuanto más seca, más moja. ¿Qué es?", respuesta: "Una toalla." },
-  { tipo: "frase",    titulo: "Para recordar",      texto: "No hace falta tenerlo todo claro para dar el siguiente paso." },
-  { tipo: "sorpresa", titulo: "Sorpresa",           texto: "Hoy te toca un abrazo largo. Cobro a domicilio cuando quieras." },
-  { tipo: "acertijo", titulo: "Acertijo",           texto: "Tiene dientes pero no muerde. ¿Qué es?", respuesta: "Un peine." },
-  { tipo: "reto",     titulo: "Mini reto",          texto: "Hoy, pon tu canción favorita y escúchala entera, sin hacer nada más." },
-  { tipo: "frase",    titulo: "Para recordar",      texto: "Eres más fuerte de lo que te dices a ti misma en los días malos." },
-  { tipo: "acertijo", titulo: "Acertijo",           texto: "Tiene agujas pero no pincha, tiene números pero no calcula. ¿Qué es?", respuesta: "Un reloj." },
-  { tipo: "sorpresa", titulo: "Sorpresa",           texto: "Cupón válido por un chocolate caliente invitado por mí." },
-  { tipo: "frase",    titulo: "Para recordar",      texto: "Descansar también es avanzar." },
-  { tipo: "acertijo", titulo: "Acertijo",           texto: "Cuanto más grande es, menos se ve. ¿Qué es?", respuesta: "La oscuridad." },
-  { tipo: "reto",     titulo: "Mini reto",          texto: "Sal a caminar 15 minutos sin móvil. Mira alrededor como si fuera la primera vez." },
-  { tipo: "frase",    titulo: "Para recordar",      texto: "Lo que sientes importa. Tómate en serio tus emociones, sin dramatizarlas." },
-  { tipo: "acertijo", titulo: "Acertijo",           texto: "Si me nombras, desaparezco. ¿Qué soy?", respuesta: "El silencio." },
-  { tipo: "sorpresa", titulo: "Sorpresa",           texto: "Cupón válido por una tarde de plan que elijas tú, sin discusión." },
-  { tipo: "reto",     titulo: "Mini reto",          texto: "Escribe tres cosas buenas que te hayan pasado esta semana." },
-  { tipo: "frase",    titulo: "Para recordar",      texto: "Las mejores historias empiezan con \"no sabía qué iba a pasar\"." },
-  { tipo: "acertijo", titulo: "Acertijo",           texto: "Vuelo sin alas, lloro sin ojos. ¿Qué soy?", respuesta: "Una nube." },
-  { tipo: "sorpresa", titulo: "Sorpresa",           texto: "Cupón válido por una cena hecha por mí. Tú eliges el menú." },
-  { tipo: "frase",    titulo: "Para recordar",      texto: "Qué suerte tener a quien te cuida aunque no lo digáis todo el rato." },
-  { tipo: "reto",     titulo: "Mini reto",          texto: "Cuéntale a alguien lo que más agradeces de él o ella. En persona o por mensaje." },
-  { tipo: "frase",    titulo: "Nochebuena",         texto: "Gracias por estar. Hoy, a disfrutar de la mesa y de la gente. 🎄" }
+  { tipo: "frase",    titulo: "Comencem",               texto: "Cada dia compta, fins i tot els més petits. Avui toca començar amb calma." },
+  { tipo: "acertijo", titulo: "Primer enigma",          texto: "Tinc ciutats però no cases, muntanyes però no arbres, aigua però no peixos. Què soc?", respuesta: "Un mapa." },
+  { tipo: "reto",     titulo: "Petit repte",             texto: "Avui, envia un missatge a algú amb qui fa temps que no parles." },
+  { tipo: "acertijo", titulo: "Enigma",                  texto: "Com més eixuga, més es mulla. Què és?", respuesta: "Una tovallola." },
+  { tipo: "frase",    titulo: "Per recordar",            texto: "No cal tenir-ho tot clar per fer el pas següent." },
+  { tipo: "sorpresa", titulo: "Sorpresa",                texto: "Avui et toca una abraçada ben llarga. La porto a domicili quan vulguis." },
+  { tipo: "acertijo", titulo: "Enigma",                  texto: "Té dents però no mossega. Què és?", respuesta: "Una pinta." },
+  { tipo: "reto",     titulo: "Petit repte",             texto: "Avui, posa la teva cançó preferida i escolta-la sencera, sense fer res més." },
+  { tipo: "frase",    titulo: "Per recordar",            texto: "Ets més forta del que et dius a tu mateixa els dies dolents." },
+  { tipo: "acertijo", titulo: "Enigma",                  texto: "Té agulles però no punxa, té números però no calcula. Què és?", respuesta: "Un rellotge." },
+  { tipo: "sorpresa", titulo: "Sorpresa",                texto: "Val per una tassa de xocolata calenta que et convido jo." },
+  { tipo: "frase",    titulo: "Per recordar",            texto: "Descansar també és avançar." },
+  { tipo: "acertijo", titulo: "Enigma",                  texto: "Com més gran és, menys es veu. Què és?", respuesta: "La foscor." },
+  { tipo: "reto",     titulo: "Petit repte",             texto: "Surt a caminar 15 minuts sense mòbil. Mira al teu voltant com si fos la primera vegada." },
+  { tipo: "frase",    titulo: "Per recordar",            texto: "El que sents importa. Pren-te seriosament les emocions, sense dramatitzar-les." },
+  { tipo: "acertijo", titulo: "Enigma",                  texto: "Si em dius, desaparec. Què soc?", respuesta: "El silenci." },
+  { tipo: "sorpresa", titulo: "Sorpresa",                texto: "Val per una tarda de plans que triïs tu, sense discutir-ho." },
+  { tipo: "reto",     titulo: "Petit repte",             texto: "Escriu tres coses bones que t'hagin passat aquesta setmana." },
+  { tipo: "frase",    titulo: "Per recordar",            texto: "Les millors històries comencen amb «no sabia què passaria»." },
+  { tipo: "acertijo", titulo: "Enigma",                  texto: "Volo sense ales, ploro sense ulls. Què soc?", respuesta: "Un núvol." },
+  { tipo: "sorpresa", titulo: "Sorpresa",                texto: "Val per un sopar fet per mi. Tu tries el menú." },
+  { tipo: "frase",    titulo: "Per recordar",            texto: "Quina sort tenir algú que et cuida, encara que no us ho digueu tota l'estona." },
+  { tipo: "reto",     titulo: "Petit repte",             texto: "Explica a algú què és el que més li agraeixes. En persona o per missatge." },
+  { tipo: "frase",    titulo: "Nit de Nadal",             texto: "Gràcies per ser-hi. Avui, a gaudir de la taula i de la companyia. 🎄" }
 ];

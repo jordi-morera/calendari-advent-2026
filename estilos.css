@@ -1,12 +1,12 @@
 :root {
-  --fondo-1: #0f1d33;
-  --fondo-2: #1b2f4f;
+  --fondo-1: #0b4a2c;
+  --fondo-2: #14693e;
   --texto: #f4efe6;
   --dorado: #f2c14e;
   --rojo: #b3283a;
   --rojo-oscuro: #8a1c2b;
-  --verde: #2f6b4f;
-  --apagado: #3a4a63;
+  --verde: #0a3d24;
+  --apagado: #2f5a43;
 }
 
 * { box-sizing: border-box; }
@@ -16,14 +16,16 @@ html, body { margin: 0; min-height: 100%; }
 body {
   font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
   color: var(--texto);
-  background: linear-gradient(180deg, var(--fondo-1), var(--fondo-2)) fixed;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, .10), transparent 60%),
+    linear-gradient(180deg, var(--fondo-2), var(--fondo-1)) fixed;
   line-height: 1.5;
 }
 
 .contenedor {
   max-width: 880px;
   margin: 0 auto;
-  padding: 24px 16px 56px;
+  padding: 72px 16px 180px;
   position: relative;
   z-index: 1;
 }
@@ -36,7 +38,7 @@ body {
 }
 .estado { margin: 0; opacity: .85; }
 
-/* ---------- Rejilla ---------- */
+/* ---------- Graella ---------- */
 .calendario {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -76,7 +78,7 @@ body {
 }
 .casilla.abierta {
   background: var(--verde);
-  border-color: rgba(255, 255, 255, .35);
+  border-color: var(--dorado);
 }
 .casilla.abierta .numero { font-size: .85rem; opacity: .8; }
 .casilla.abierta .icono { font-size: clamp(1.3rem, 5vw, 1.9rem); }
@@ -114,7 +116,7 @@ body {
   color: var(--dorado);
 }
 
-/* ---------- Modal ---------- */
+/* ---------- Diàleg ---------- */
 .modal {
   border: none;
   padding: 0;
@@ -123,11 +125,11 @@ body {
   width: 100%;
   color: var(--texto);
 }
-.modal::backdrop { background: rgba(5, 10, 20, .75); }
+.modal::backdrop { background: rgba(2, 20, 10, .78); }
 
 .modal-caja {
   position: relative;
-  background: linear-gradient(160deg, #24395c, #172844);
+  background: linear-gradient(160deg, #1a6b41, #0c4529);
   border: 2px solid var(--dorado);
   border-radius: 18px;
   padding: 28px 24px 24px;
@@ -170,13 +172,13 @@ body {
   cursor: pointer;
 }
 
-/* ---------- Aviso ---------- */
+/* ---------- Avís ---------- */
 .aviso {
   position: fixed;
   left: 50%;
   bottom: 24px;
   transform: translate(-50%, 20px);
-  background: #0b1424;
+  background: #07301c;
   border: 1px solid var(--dorado);
   padding: 10px 18px;
   border-radius: 999px;
@@ -189,7 +191,44 @@ body {
 }
 .aviso.visible { opacity: 1; transform: translate(-50%, 0); }
 
-/* ---------- Nieve ---------- */
+/* ---------- Garlanda ---------- */
+.guirnalda {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 56px;
+  z-index: 2;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='56' viewBox='0 0 140 56'%3E%3Cpath d='M0 4 Q35 44 70 4 Q105 44 140 4' fill='none' stroke='%231f7a45' stroke-width='7' stroke-linecap='round'/%3E%3Cpath d='M0 4 Q35 44 70 4 Q105 44 140 4' fill='none' stroke='%2349b574' stroke-width='2' stroke-dasharray='3 5'/%3E%3Ccircle cx='17' cy='22' r='6' fill='%23d9363e'/%3E%3Ccircle cx='35' cy='28' r='6' fill='%23f2c14e'/%3E%3Ccircle cx='53' cy='22' r='6' fill='%23fff'/%3E%3Ccircle cx='87' cy='22' r='6' fill='%23f2c14e'/%3E%3Ccircle cx='105' cy='28' r='6' fill='%23d9363e'/%3E%3Ccircle cx='123' cy='22' r='6' fill='%23fff'/%3E%3C/svg%3E") repeat-x top left;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, .35));
+}
+
+/* ---------- Paisatge nadalenc ---------- */
+.paisaje {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  height: 150px;
+  z-index: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  padding: 0 8px;
+  background: linear-gradient(0deg, rgba(255, 255, 255, .85) 0 10px, transparent 10px);
+}
+.paisaje svg { height: auto; display: block; margin-bottom: 4px; }
+.arbol-a { width: 90px; }
+.arbol-b { width: 70px; }
+.arbol-c { width: 80px; }
+.arbol-d { width: 64px; }
+.caga-tio { width: 170px; }
+@media (max-width: 639px) {
+  .arbol-b, .arbol-d { display: none; }
+  .arbol-a, .arbol-c { width: 64px; }
+  .caga-tio { width: 130px; }
+  .paisaje { height: 120px; }
+}
+
+/* ---------- Neu ---------- */
 .nieve { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
 .nieve span {
   position: absolute;

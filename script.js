@@ -4,8 +4,8 @@
   const TOTAL = 24;
   const ICONOS = { frase: "💬", acertijo: "🧩", reto: "⭐", sorpresa: "🎁" };
 
-  // Modo prueba: añade ?dia=10 a la URL para simular que hoy es el día 10 de diciembre.
-  // En modo prueba se usa un almacenamiento aparte, así no ensucias el calendario real.
+  // Mode de prova: afegeix ?dia=10 a l'URL per simular que avui és 10 de desembre.
+  // En mode de prova s'utilitza un emmagatzematge separat per no alterar el calendari real.
   const params = new URLSearchParams(location.search);
   const diaForzado = params.get("dia");
   const modoPrueba = diaForzado !== null && /^\d+$/.test(diaForzado);
@@ -16,7 +16,7 @@
   const modal = $("modal");
   const aviso = $("aviso");
 
-  // ---------- Estado ----------
+  // ---------- Estat ----------
   function leerAbiertos() {
     try {
       const datos = JSON.parse(localStorage.getItem(CLAVE) || "[]");
@@ -28,8 +28,8 @@
   }
   let abiertos = leerAbiertos();
 
-  // ---------- Fecha ----------
-  // Devuelve hasta qué día de diciembre está desbloqueado (0 = aún no empieza).
+  // ---------- Data ----------
+  // Retorna fins a quin dia de desembre està desbloquejat (0 = encara no ha començat).
   function diaDesbloqueado() {
     if (modoPrueba) return Math.min(parseInt(diaForzado, 10), TOTAL);
     const hoy = new Date();
@@ -46,20 +46,20 @@
     return Math.round((inicio - hoy0) / 86400000);
   }
 
-  // ---------- Pintado ----------
+  // ---------- Renderització ----------
   function pintarCabecera(limite) {
-    $("titulo").textContent = "Calendario de Adviento de " + CONFIG.nombre;
-    document.title = "Adviento de " + CONFIG.nombre;
+    $("titulo").textContent = "Calendari d'Advent de " + CONFIG.nombre;
+    document.title = "Advent de " + CONFIG.nombre;
     let texto;
     if (limite === 0) {
       const n = diasHastaInicio();
-      texto = n === 1 ? "Empieza mañana. Paciencia 😉" : "Empieza el 1 de diciembre. Faltan " + n + " días.";
+      texto = n === 1 ? "Comença demà. Paciència 😉" : "Comença l'1 de desembre. Falten " + n + " dies.";
     } else if (limite >= TOTAL && !modoPrueba && new Date().getMonth() !== 11) {
-      texto = "El calendario ya está completo.";
+      texto = "El calendari ja està complet.";
     } else {
-      texto = "Hoy es " + limite + " de diciembre. Ya puedes abrir hasta esta casilla.";
+      texto = "Avui és " + limite + " de desembre. Ja pots obrir fins a aquesta casella.";
     }
-    if (modoPrueba) texto += " (modo prueba)";
+    if (modoPrueba) texto += " (mode de prova)";
     $("estado").textContent = texto;
   }
 
@@ -93,15 +93,15 @@
         ico.className = "icono";
         ico.textContent = ICONOS[dia.tipo] || "🎄";
         b.appendChild(ico);
-        b.setAttribute("aria-label", "Día " + n + ", abierto. Ver de nuevo.");
+        b.setAttribute("aria-label", "Dia " + n + ", obert. Torna'l a veure.");
       } else if (estado === "futura") {
         const ico = document.createElement("span");
         ico.className = "icono";
         ico.textContent = "🔒";
         b.appendChild(ico);
-        b.setAttribute("aria-label", "Día " + n + ", todavía bloqueado");
+        b.setAttribute("aria-label", "Dia " + n + ", encara bloquejat");
       } else {
-        b.setAttribute("aria-label", "Día " + n + ", pulsa para abrir");
+        b.setAttribute("aria-label", "Dia " + n + ", prem per obrir");
       }
 
       b.addEventListener("click", () => alPulsar(n, b));
@@ -117,7 +117,7 @@
     }
   }
 
-  // ---------- Interacción ----------
+  // ---------- Interacció ----------
   let avisoTimer;
   function mostrarAviso(texto) {
     aviso.textContent = texto;
@@ -132,7 +132,7 @@
       boton.classList.remove("temblor");
       void boton.offsetWidth; // reinicia la animación
       boton.classList.add("temblor");
-      mostrarAviso("Esta casilla se abre el " + n + " de diciembre. ¡Paciencia! 🎅");
+      mostrarAviso("Aquesta casella s'obre el " + n + " de desembre. Paciència! 🎅");
       return;
     }
     if (!abiertos.includes(n)) {
@@ -145,7 +145,7 @@
 
   function abrirModal(n) {
     const dia = DIAS[n - 1];
-    $("modal-dia").textContent = (ICONOS[dia.tipo] || "🎄") + "  " + n + " de diciembre";
+    $("modal-dia").textContent = (ICONOS[dia.tipo] || "🎄") + "  " + n + " de desembre";
     $("modal-titulo").textContent = dia.titulo || "";
     $("modal-texto").textContent = dia.texto || "";
 
@@ -153,7 +153,7 @@
     const resp = $("modal-respuesta");
     resp.hidden = true;
     if (dia.respuesta) {
-      resp.textContent = "Respuesta: " + dia.respuesta;
+      resp.textContent = "Resposta: " + dia.respuesta;
       btn.hidden = false;
       btn.onclick = () => { resp.hidden = false; btn.hidden = true; };
     } else {
@@ -172,7 +172,7 @@
   $("modal-cerrar").addEventListener("click", cerrarModal);
   modal.addEventListener("click", (e) => { if (e.target === modal) cerrarModal(); });
 
-  // ---------- Nieve (decorativa, se desactiva con "reducir movimiento") ----------
+  // ---------- Neu (decorativa, es desactiva amb «reduir el moviment») ----------
   function nieve() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const cont = document.querySelector(".nieve");
